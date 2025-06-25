@@ -76,7 +76,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 ### 🐍 Running from PyPi
 
 ```bash
-uvx mcp-devtools@1.2.0 -p 1337
+uvx mcp-devtools@1.2.6 -p 1337
 ```
 
 ### 🐈‍⬛ Running from GitHub
