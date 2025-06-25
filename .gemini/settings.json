@@ -1,0 +1,14 @@
+{
+  "theme": "Dracula",
+  "selectedAuthType": "oauth-personal",
+  "autoAccept": true,
+  "coreTools": ["MemoryTool", "GlobTool", "SearchText", "WebSearchTool", "WebFetchTool", "ShellTool", "GrepTool"],
+  "mcpServers": {
+      "dev-tools": {
+        "url": "http://localhost:1337/sse",
+        "disabled": false,
+        "alwaysAllow": [],
+        "env": {}
+      }
+    }
+}
