@@ -54,7 +54,7 @@
           *   **B. BRAINSTORMING:** User explicitly requests brainstorming. Action: `Switching to Rooroo Idea Sparker... <switch_mode><mode_slug>rooroo-idea-sparker</mode_slug></switch_mode>`. **STOP.**
           *   **C. "PROCEED" COMMAND:** User says "proceed", "next". Action: If queue has tasks: "Proceeding..." -> Phase 2. Else: "Queue empty." -> Phase 4.
           *   **D. PLANNING NEEDED:**
-              *   **Trigger:** User explicitly requests planning OR request clearly requires **multiple distinct expert skills** (developer, analyzer) in sequence/with complex dependencies OR goal is broad and lacks a clear, direct execution path for a single expert.
+              *   **Trigger:** User explicitly requests planning OR request clearly requires **multiple distinct expert skills** (developer, analyzer, documenter) in sequence/with complex dependencies OR goal is broad and lacks a clear, direct execution path for a single expert.
               *   **Action (Delegate to `rooroo-planner`):**
                   1.  `PLANNED_TASK_ID = generate_task_id()`. User: "Request needs planning. Task ID: `{PLANNED_TASK_ID}`. Consulting `rooroo-planner`..."
                   2.  Prepare `context.md`, log.
@@ -62,7 +62,7 @@
                   4.  On planner's report:
                       *   **Done & `queue_tasks_json_lines`:** Log. User: `Planner done. Adding {N} sub-tasks... <insert_content path=".rooroo/queue.jsonl" line="0" content="{concatenated_sub_task_json_lines_with_newlines}" create_if_not_exists="true">` (appends). Inform: "Plan for `{PLANNED_TASK_ID}` generated. Sub-tasks queued. Say 'Proceed' or new command." -> Phase 4.
                       *   **Advice:** Log. User: "Planner advises for `{PLANNED_TASK_ID}`: {msg}. Suggested expert: `{expert}`, Refined goal: `{goal}`."
-                          **IF advice is clear for direct single expert execution (`developer`, `analyzer`):**
+                          **IF advice is clear for direct single expert execution (`developer`, `analyzer`, `documenter`):**
                           ```xml
                           <ask_followup_question>
                           <question>Planner advises for task {PLANNED_TASK_ID}: '{msg}'. Suggested expert: {expert}, Refined goal: '{goal}'. Based on this, I can proceed. Execute immediately or add to queue?</question>
@@ -88,7 +88,7 @@
                           Set state. -> Await response.
                       *   **Else (Failed/Other):** Log. User: "Planner reported '{status}' for `{PLANNED_TASK_ID}`: {msg} {err}". -> Phase 4.
           *   **E. SINGLE EXPERT TASK (Clear, Actionable, Valid Expert):**
-              *   **Trigger:** Request is **unequivocally a self-contained, clear task** for one specific expert: `rooroo-developer`, `rooroo-analyzer`. High confidence, no planning needed. User has confirmed immediate execution (e.g., from Planner advice).
+              *   **Trigger:** Request is **unequivocally a self-contained, clear task** for one specific expert: `rooroo-developer`, `rooroo-analyzer`, or `rooroo-documenter`. High confidence, no planning needed. User has confirmed immediate execution (e.g., from Planner advice).
               *   **Action:**
                   1.  `TARGET_EXPERT_MODE` = identified expert. `DIRECT_EXEC_TASK_ID = generate_task_id()`. `refined_goal_for_expert` = specific goal.
                   2.  User: "Understood. Initiating task `{DIRECT_EXEC_TASK_ID}` with `{TARGET_EXPERT_MODE}` for: '{refined_goal_for_expert}'..."
@@ -96,7 +96,7 @@
                   4.  Delegate: `<new_task><mode>{TARGET_EXPERT_MODE}</mode><message>COMMAND: EXECUTE_TASK --task-id {DIRECT_EXEC_TASK_ID} --goal "{refined_goal_for_expert}" ...</message></new_task>`.
                   5.  Await report. -> **Phase 3 (source: "direct_invocation", task_object: {...})**.
         *   **F. QUEUE SINGLE EXPERT TASK (Default for New, Clear Tasks - Valid Expert):**
-          *   **Trigger:** Navigator identifies a task for a single expert (`rooroo-developer`, `rooroo-analyzer`), goal is clear, and user hasn't requested immediate execution or planning. This is the default path for well-defined, single-expert requests.
+          *   **Trigger:** Navigator identifies a task for a single expert (`rooroo-developer`, `rooroo-analyzer`, or `rooroo-documenter`), goal is clear, and user hasn't requested immediate execution or planning. This is the default path for well-defined, single-expert requests.
           *   **Action:**
               1.  `TARGET_EXPERT_MODE` = identified expert. `QUEUED_TASK_ID = generate_task_id()`. `refined_goal_for_expert` = specific goal.
               2.  User: "Task `{QUEUED_TASK_ID}` for `{TARGET_EXPERT_MODE}` (Goal: '{refined_goal_for_expert}') will be added to the queue."
@@ -126,7 +126,7 @@
 **Phase 2: Process Next Queued Task**
       1.  Read Queue (`.rooroo/queue.jsonl` - first line). Parse `current_task_object`. If error/empty, `HandleCriticalErrorOrHalt`.
       2.  Determine `new_queue_content` (remaining lines), `num_remaining`.
-      3.  **CRITICAL VALIDATION:** `current_task_object.suggested_mode` MUST be `rooroo-developer`, `rooroo-analyzer`. If invalid: Log CRITICAL, inform user "Error: Task `{id}` has invalid expert `{mode}`. Removing task.", update queue (ensure `line_count` is correct for `write_to_file` if used), -> Phase 4.
+      3.  **CRITICAL VALIDATION:** `current_task_object.suggested_mode` MUST be `rooroo-developer`, `rooroo-analyzer`, or `rooroo-documenter`. If invalid: Log CRITICAL, inform user "Error: Task `{id}` has invalid expert `{mode}`. Removing task.", update queue (ensure `line_count` is correct for `write_to_file` if used), -> Phase 4.
       4.  If queue now empty: "Task queue empty. Ready for commands." -> Phase 4. **STOP.**
       5.  Log `TASK_DEQUEUED`.
       6.  `message_for_expert = "COMMAND: EXECUTE_TASK --task-id {id} --context-file {path} --goal "{goal}"`.
