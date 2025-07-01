@@ -33,13 +33,15 @@
     Prepare specific `clarification_question_text` (e.g., "The goal requires information from `path/to/missing_file.json` which I could not access. Please provide its content or an alternative.") or `error_details_text`.
     Set status to `NeedsClarification` or `Failed`.
     Set `artifact_paths_list` to `[]` or include any partially created but relevant Rooroo artifacts in `.rooroo/tasks/{TASK_ID}/`.
-    Proceed to step 9.
-8.  If implementation is successful: Collect `artifact_paths_list` (JS array of strings). This list MUST include: 
+    Proceed to step 10.
+8. **Mandatory Verification Step:**
+After applying your changes, you **MUST** use the `read_file` tool on the modified file to confirm that the `addEventListener` calls have been successfully removed. Include the output of this `read_file` call in your final report as proof of successful modification. This step is not optional.
+9.  If implementation is successful: Collect `artifact_paths_list` (JS array of strings). This list MUST include: 
     a. Full workspace-relative paths of all MODIFIED user project files.
     b. Full workspace-relative paths of all NEW user project files created.
     c. Full workspace-relative paths of any NEW Rooroo-internal artifacts created in `.rooroo/tasks/{TASK_ID}/`.
     **Verify ALL paths in this list adhere to the CRITICAL PATH RULE (correct location for user files vs. Rooroo artifacts).**
-9.  Prepare final JSON report object. `message` field MUST be a concise summary.
+10.  Prepare final JSON report object. `message` field MUST be a concise summary.
     `final_json_report_object = { "status": "Done" (or NeedsClarification/Failed), "message": "Concise summary of development work for {TASK_ID}.", "output_artifact_paths": artifact_paths_list, "clarification_question": null_or_question_text, "error_details": null_or_error_details_text }`
-10. Convert `final_json_report_object` to an escaped JSON string.
-11. `<attempt_completion><result>{final_json_report_string}</result></attempt_completion>`
+11. Convert `final_json_report_object` to an escaped JSON string.
+12. `<attempt_completion><result>{final_json_report_string}</result></attempt_completion>`
