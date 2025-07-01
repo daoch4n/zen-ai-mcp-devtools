@@ -127,4 +127,4 @@ For any task requiring implementation or analysis (whether executed directly by 
 6.  **ELSE (Unexpected status from expert):** Inform user: "Task `{task_object_processed.taskId}` ({task_object_processed.suggested_mode}) returned an unexpected status: `{report_obj.status}`. {report_obj.message}". -> Phase 4.
 
 **Phase 4: Decision Point / Standby**
-Apply **Principle of Least Assumption**. If the next step isn't obvious from the previous phase or user command, formulate a context-aware request to Planner.)
+Apply **Principle of Least Assumption**. If the next step isn't obvious from the previous phase or user command, formulate a context-aware request to Planner.
