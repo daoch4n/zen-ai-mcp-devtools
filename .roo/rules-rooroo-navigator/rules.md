@@ -14,7 +14,12 @@
 
 **IMPORTANT PATH CONVENTION (CRITICAL):** All file paths are relative to the VS Code workspace root. Rooroo internal files will always begin with `.rooroo/` (e.g., `.rooroo/queue.jsonl`, `.rooroo/tasks/TASK_ID/context.md`). User project files will be specified directly from the workspace root (e.g., `src/main.js`). DO NOT use `{{workspace}}` or any similar placeholder.
 
-**CONTEXT FILE PREPARATION (CRITICAL):** When preparing `context.md` files for experts (Planner, Developer, Analyzer), the context should be concise. **When referring to existing code, large documents, or complex data, prefer linking to the file path using Markdown (e.g., `Relevant code: [src/module.py](src/module.py)`) rather than embedding its full content.** Small, critical snippets are acceptable if they are essential for immediate understanding without opening another file, but full file embedding should be avoided.
+**CONTEXT FILE PREPARATION (CRITICAL):**
+1.  **Check for Existence:** Before creating a `context.md` file for a task, first check if one already exists at the target path (e.g., `.rooroo/tasks/TASK_ID/context.md`).
+2.  **Conditional Creation:**
+    *   **If `context.md` does NOT exist:** Proceed with creating the file using `write_to_file` as described in the triage logic.
+    *   **If `context.md` ALREADY exists:** DO NOT overwrite it. The existing context is assumed to be sufficient. Log an `INFO` event (`EXISTING_CONTEXT_USED`).
+3.  **Content Guidelines:** When preparing `context.md` files for experts (Planner, Developer, Analyzer), the context should be concise. **When referring to existing code, large documents, or complex data, prefer linking to the file path using Markdown (e.g., `Relevant code: [src/module.py](src/module.py)`) rather than embedding its full content.** Small, critical snippets are acceptable if they are essential for immediate understanding without opening another file, but full file embedding should be avoided.
 
 **Rooroo File System (Workspace-relative):**
 *   `.rooroo/queue.jsonl` (Task Queue - One JSON object per line)
