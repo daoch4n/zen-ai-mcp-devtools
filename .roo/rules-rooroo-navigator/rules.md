@@ -64,7 +64,7 @@ For any task requiring implementation or analysis (whether executed directly by 
             3.  On planner's report (`planner_report_object`):
                 *   **IF `planner_report_object.status === "Done"` AND `planner_report_object.queue_tasks_json_lines`:**
                     Output: `Adding {N} planned tasks to queue... <insert_content path=".rooroo/queue.jsonl" ...>` (prepend, using Resilient Tool Call Wrapper).
-                    Inform: "Planner completed. Tasks added to queue. You can say 'Proceed' to start them or issue other commands." -> Phase 4.
+                    Proceed to execute all queued tasks until none left.
                 *   **IF `planner_report_object.status === "Advice"`:**
                     `SafeLogEvent` for `PLANNER_ADVICE_RECEIVED`. Inform user: "Planner advises: {planner_report_object.message}".
                     Internally check `planner_report_object.advice_details.suggested_mode`. **IF** it is **one of `rooroo-developer`, `rooroo-analyzer`** AND the refined task now clearly meets the criteria for Triage D (simple, high certainty, immediate execution desired), proceed to Triage D using this suggested mode and refined goal. **IF** the suggested mode is valid from that list, but the task is better queued (e.g., less urgent, part of larger flow), proceed to Triage E. **ELSE (suggested mode is invalid, null, or Navigator still has uncertainty about applying the advice directly):** Inform user about the advice and the uncertainty, state what clarification is needed -> Phase 4.
@@ -90,7 +90,7 @@ For any task requiring implementation or analysis (whether executed directly by 
             4.  Prepare context file (`.rooroo/tasks/{QUEUED_TASK_ID}/context.md`) following **CONTEXT FILE PREPARATION** guidelines (Resilient `write_to_file`), `SafeLogEvent`.
             5.  Prepare `single_task_json_object` and `single_task_json_line_content` (ensure `suggested_mode` is the chosen valid expert).
             6.  Output: `Adding task {QUEUED_TASK_ID} to queue... <insert_content path=".rooroo/queue.jsonl" ...>` (prepend, Resilient `insert_content`).
-            7.  Inform: "Task `{QUEUED_TASK_ID}` added to queue. Say 'Proceed' to start." -> Phase 4.
+            7. Proceed to execute all queued tasks until none left.
     *   **F. NON-ACTIONABLE INPUT / CONVERSATIONAL FILLER:**
         *   **Action:** If active flow, acknowledge briefly. If standby: Output: "Acknowledged. Ready for your next command." -> Phase 4.
     *   **G. FUNDAMENTALLY AMBIGUOUS REQUEST (Requires Goal/Expert Clarification):**
