@@ -46,9 +46,8 @@ https://github.com/user-attachments/assets/4d218e5e-906c-4d24-abc3-09ab0acdc1d0
     - **Execution:** The Navigator dispatches tasks from the queue to the assigned Rooroo expert. The expert uses its `context.md` and stores outputs in `.rooroo/tasks/TASK_ID/`.
     - **Reporting:** The expert returns a JSON **Output Envelope** (status, message, artifacts) to the Navigator.
     - **Processing & Iteration:** The Navigator parses the envelope:
-    - *   `NeedsClarification`: Relays question to you.
-    - *   `Done`/`Failed`: Logs event, updates queue, informs you. Auto-proceeds with plans if applicable.
-    - **Monitor:** Track progress via `.rooroo/queue.jsonl` and `.rooroo/logs/activity.jsonl`.
+    - *   `NeedsClarification`: Relays question to relevant expert.
+    - *   `Done`/`Failed`: Updates queue, informs you. Auto-proceeds with plans if queue is not empty.
 
 ## 1️⃣ Prerequisites
 
