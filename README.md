@@ -42,7 +42,7 @@ https://github.com/user-attachments/assets/4d218e5e-906c-4d24-abc3-09ab0acdc1d0
     -  **Navigator Triage:** The Navigator assesses your request:
     -  *   For *complex/uncertain tasks*, it engages the `🗓️ Rooroo Planner` agent to break it down into sub-tasks with `context.md` briefings. These go into the `.rooroo/queue.jsonl`.
     -  *   For *simple, clear single-expert tasks*, it prepares `context.md` and may execute directly or queue the task.
-    *   If *ambiguous*, it asks you for clarification.
+    *   If *ambiguous*, it asks `🗓️ Rooroo Planner` for clarification.
     - **Execution:** The Navigator dispatches tasks from the queue to the assigned Rooroo expert. The expert uses its `context.md` and stores outputs in `.rooroo/tasks/TASK_ID/`.
     - **Reporting:** The expert returns a JSON **Output Envelope** (status, message, artifacts) to the Navigator.
     - **Processing & Iteration:** The Navigator parses the envelope:
