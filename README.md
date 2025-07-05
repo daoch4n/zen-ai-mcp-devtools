@@ -1,5 +1,7 @@
 # ⚙️ mcp-devtools: multi-functional development tools MCP server over SSE [🌸 リードミー](https://github.com/daoch4n/zen-ai-mcp-devtools/blob/main/%E3%83%AA%E3%83%BC%E3%83%89%E3%83%9F%E3%83%BC.MD) [🏮 读我](https://github.com/daoch4n/zen-ai-mcp-devtools/blob/main/%E8%AF%BB%E6%88%91.MD)
 
+https://github.com/user-attachments/assets/d0b7b41b-c420-4b84-8807-d8a00300bd3e
+
 [![GitHub repository](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/daoch4n/zen-ai-mcp-devtools)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/daoch4n/zen-ai-mcp-devtools/python-package.yml?branch=main)](https://github.com/daoch4n/zen-ai-mcp-devtools/actions/workflows/python-package.yml)
 [![PyPI](https://img.shields.io/pypi/v/mcp-devtools)](https://pypi.org/project/mcp-devtools)
