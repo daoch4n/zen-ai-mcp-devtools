@@ -7,11 +7,13 @@ https://github.com/user-attachments/assets/d0b7b41b-c420-4b84-8807-d8a00300bd3e
 [![PyPI](https://img.shields.io/pypi/v/mcp-devtools)](https://pypi.org/project/mcp-devtools)
 
 - 🔧 `mcp-devtools` offers a comprehensive suite of development tools: [ℹ️ Available Tools](#%E2%84%B9%EF%B8%8F-available-tools)
-  -  🎋 Git management operations (`git_status`, `git_stage_and_commit`, `git_diff`, `git_diff_all`, `git_log`, `git_create_branch`, `git_reset` `git_checkout`, `git_show`)
-  -  📁 Git file operations (`git_read_file`, `git_apply_diff`)
-  -  📂 Direct file operations (`search_and_replace`, `write_to_file`) [ℹ️ Direct vs AI-assisted](#-direct-code-editing-vs--ai-assisted-editing)
-  -  🤖 AI-assisted file operations using [Aider](https://github.com/Aider-AI/aider) (`ai_edit`) [ℹ️ Aider Configuration](docs/aider_config.md)
+  -  🤖 AI-assisted file operations (`ai_edit`(uses [Aider](https://github.com/Aider-AI/aider)) [ℹ️ Aider Configuration](docs/aider_config.md)
+  -  📁 Git-assisted file operations (`git_read_file`, `git_apply_diff`)
+  -  📂 Direct file operations (`search_and_replace`(uses `sed` with fallback to direct mode), `write_to_file`) [ℹ️ Direct vs AI-assisted](#-direct-code-editing-vs--ai-assisted-editing)
+  -  🎋 Git management operations (`git_diff_all`, `git_stage_and_commit`, `git_status`, `git_diff`(compare to different commits/branches), `git_log`, `git_create_branch`, `git_reset`, `git_checkout`, `git_show`)
   -  🖥️ Terminal commands execution (`execute_command`) [⚠️ Automation-Related Security](#-automation-related-security-considerations)
+
+## 🎧 Audio Overview
 
 https://github.com/user-attachments/assets/05670a7a-72c5-4276-925c-dbd1ed617d99
 
