@@ -6,11 +6,11 @@ https://github.com/user-attachments/assets/d0b7b41b-c420-4b84-8807-d8a00300bd3e
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/daoch4n/zen-ai-mcp-devtools/python-package.yml?branch=main)](https://github.com/daoch4n/zen-ai-mcp-devtools/actions/workflows/python-package.yml)
 [![PyPI](https://img.shields.io/pypi/v/mcp-devtools)](https://pypi.org/project/mcp-devtools)
 
-- 🔧 `mcp-devtools` offers a comprehensive suite of development tools: [ℹ️ Available Tools](#%E2%84%B9%EF%B8%8F-available-tools)
+- 🔧 `mcp-devtools` offers a comprehensive suite of software development tools: [ℹ️ Available Tools](#%E2%84%B9%EF%B8%8F-available-tools)
   -  🤖 AI-assisted file operations (`ai_edit`(uses [Aider](https://github.com/Aider-AI/aider)) [ℹ️ Aider Configuration](docs/aider_config.md)
   -  📁 Git-assisted file operations (`git_read_file`, `git_apply_diff`)
   -  📂 Direct file operations (`search_and_replace`(uses `sed` with fallback to direct mode), `write_to_file`) [ℹ️ Direct vs AI-assisted](#-direct-code-editing-vs--ai-assisted-editing)
-  -  🎋 Git management operations (`git_diff_all`, `git_stage_and_commit`, `git_status`, `git_diff`(compare to different commits/branches), `git_log`, `git_create_branch`, `git_reset`, `git_checkout`, `git_show`)
+  -  🎋 Git management operations (`git_diff_all`(compares to HEAD, `git_diff`(compares to specific commits/branches), `git_show`, `git_stage_and_commit`, `git_status`, `git_log`, `git_create_branch`, `git_checkout`, `git_reset`)
   -  🖥️ Terminal commands execution (`execute_command`) [⚠️ Automation-Related Security](#-automation-related-security-considerations)
 
 ## 🎧 Audio Overview
